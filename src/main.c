@@ -1,24 +1,18 @@
-#include <SDL3/SDL.h>
+#include <fancon/display.h>
 
 int main() {
-    if (!SDL_Init(SDL_INIT_VIDEO)) return 1;
+    Display *display = display_new("Fantasy Console", 640, 640, DISPLAY_TYPE_CRT);
 
-    SDL_Window *window;
-    if (!(window = SDL_CreateWindow("It's Bad", 640, 480, 0))) {
-        SDL_Quit();
-        return 1;
+    display_set_signal_size(display, 12, 12, 5, 4);
+
+    dword color = 0xffff;
+    while (!display_should_close(display)) {
+        display_draw_pixel(display, (color += 0xff0000));
+
+        display_update(display);
     }
 
-    SDL_Event event;
-    bool running = true;
-    while (running) {
-        while (SDL_PollEvent(&event)) switch (event.type) {
-            case SDL_EVENT_QUIT: running = false;
-        }
-    }
-
-    SDL_DestroyWindow(window);
-    SDL_Quit();
+    display_destroy(&display);
 
     return 0;
 }

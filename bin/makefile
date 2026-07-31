@@ -1,2 +1,2 @@
 all:
-	gcc -I ../include -o main ../src/*.c -L ../lib -lSDL3
+	gcc -s -O2 -flto -I ../include -o main ../src/*.c -L ../lib -lSDL3
