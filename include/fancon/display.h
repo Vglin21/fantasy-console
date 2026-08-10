@@ -14,32 +14,30 @@ typedef uint64_t qword;
 
 #endif
 
-typedef struct Display Display;
-
 typedef enum {
     DISPLAY_TYPE_CRT,
     DISPLAY_TYPE_LCD
 } DisplayType;
 
-typedef struct {
-    word width, height;
-    dword area;
+typedef enum {
+    DISPK_RIGHT = 79,
+    DISPK_LEFT,
+    DISPK_DOWN,
+    DISPK_UP
+} DisplayKey;
 
-    word hblank, vblank;
-    word full_width, full_height;
-    dword full_area;
-} SignalSize;
+extern bool display_turn_on(const char *title, dword width, dword height, DisplayType type);
+extern void display_turn_off();
 
-Display *display_new(const char *title, dword width, dword height, DisplayType type);
-void display_destroy(Display **display);
+extern bool display_should_close();
+extern bool display_is_key_pressed(DisplayKey key);
+extern bool display_is_frame_active();
 
-bool display_should_close(Display *display);
+extern bool display_set_signal_size(word width, word height, word hblank, word vblank);
 
-bool display_set_signal_size(Display *display, word width, word height, word hblank, word vblank);
+extern void display_draw_pixel(dword color);
+extern void display_draw_pixels(dword color, size_t count);
 
-void display_draw_pixel(Display *display, dword color);
-void display_draw_pixels(Display *display, dword color, size_t count);
-
-void display_update(Display *display);
+extern void display_update();
 
 #endif

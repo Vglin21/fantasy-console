@@ -1,18 +1,29 @@
 #include <fancon/display.h>
 
 int main() {
-    Display *display = display_new("Fantasy Console", 640, 640, DISPLAY_TYPE_CRT);
+    display_turn_on("DOT-8", 640, 640, DISPLAY_TYPE_LCD);
 
-    display_set_signal_size(display, 12, 12, 5, 4);
+    display_set_signal_size(16, 16, 0, 0);
 
-    dword color = 0xffff;
-    while (!display_should_close(display)) {
-        display_draw_pixel(display, (color += 0xff0000));
+    byte pos = 0x77;
+    byte beam = 0;
+    while (!display_should_close()) {
+        while (display_is_frame_active()) {
+            if (display_is_key_pressed(DISPK_UP))    pos -= 0x10;
+            if (display_is_key_pressed(DISPK_LEFT))  pos--;
+            if (display_is_key_pressed(DISPK_DOWN))  pos += 0x10;
+            if (display_is_key_pressed(DISPK_RIGHT)) pos++;
+    
+            while (1) {
+                display_draw_pixel(beam == pos ? 0xffffffff : 0xff);
+                if ((beam++) == 255) break;
+            }
+        }
 
-        display_update(display);
+        display_update();
     }
 
-    display_destroy(&display);
+    display_turn_off();
 
     return 0;
 }
