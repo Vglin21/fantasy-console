@@ -1,2 +1,5 @@
+flags = -s -O2 -flto
+program = dot-5
+
 all:
-	gcc -s -O2 -flto -I ../include -o main ../src/*.c -L ../lib -lSDL3
+	gcc $(flags) -I ../include -o $(program) ../src/*.c -L ../lib -lSDL3

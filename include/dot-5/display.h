@@ -1,11 +1,11 @@
-#ifndef __DISPLAY_H_
-#define __DISPLAY_H_
+#ifndef _DISPLAY_H_
+#define _DISPLAY_H_
 
 #include <stdbool.h>
 #include <stdint.h>
 
-#ifndef __CUSTOM_TYPES
-#define __CUSTOM_TYPES
+#ifndef _CUSTOM_TYPES_
+#define _CUSTOM_TYPES_
 
 typedef uint8_t byte;
 typedef uint16_t word;
@@ -34,6 +34,7 @@ extern bool display_is_key_pressed(DisplayKey key);
 extern bool display_is_frame_active();
 
 extern bool display_set_signal_size(word width, word height, word hblank, word vblank);
+extern void display_set_fps(dword fps);
 
 extern void display_draw_pixel(dword color);
 extern void display_draw_pixels(dword color, size_t count);
