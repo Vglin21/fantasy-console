@@ -57,7 +57,7 @@ bool display_turn_on(const char *title, dword width, dword height, DisplayType t
     }
     SDL_SetRenderVSync(renderer, 1);
 
-    target_time_step = 1.0 / 60;
+    target_time_step = 1.0 / 60.0;
     frequency = SDL_GetPerformanceFrequency();
     frame_end = SDL_GetPerformanceCounter();
 
@@ -127,7 +127,7 @@ bool display_set_signal_size(word width, word height, word hblank, word vblank) 
         return true;
     } else return false;
 }
-void display_set_fps(dword fps) { target_time_step = 1.0 / fps; }
+void display_set_fps(double fps) { target_time_step = 1.0 / fps; }
 
 void display_draw_pixel(dword color) {
     if (signal) {

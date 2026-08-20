@@ -34,7 +34,7 @@ extern bool display_is_key_pressed(DisplayKey key);
 extern bool display_is_frame_active();
 
 extern bool display_set_signal_size(word width, word height, word hblank, word vblank);
-extern void display_set_fps(dword fps);
+extern void display_set_fps(double fps);
 
 extern void display_draw_pixel(dword color);
 extern void display_draw_pixels(dword color, size_t count);
